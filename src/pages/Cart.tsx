@@ -85,7 +85,7 @@ export default function Cart() {
 
   if (cart.length === 0) {
     return (
-      <div className="min-h-screen bg-[#0A0A0B] pt-32 pb-16 px-4">
+      <div className="min-h-screen bg-[#0A0A0B] pt-8 sm:pt-12 pb-16 px-4">
         <div className="max-w-md mx-auto text-center">
           <ShoppingCart className="mx-auto h-16 w-16 text-gray-600 mb-6" />
           <h1 className="text-2xl font-bold text-white mb-4">
@@ -105,7 +105,7 @@ export default function Cart() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0A0B] pt-32 pb-16">
+    <div className="min-h-screen bg-[#0A0A0B] pt-8 sm:pt-12 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold text-white mb-8">
           Mon panier ({cartCount} article{cartCount > 1 ? "s" : ""})

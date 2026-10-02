@@ -51,7 +51,7 @@ export default function ProductCard({ id, name, ref, priceHT, oldPriceHT, image,
               {promo}
             </span>
           )}
-          {discount > 0 && (
+          {discount > 0 && !promo && (
             <span className="absolute top-2 right-2 bg-[#D4A853] text-[#0A0A0B] text-xs font-bold px-2 py-1 rounded">
               -{discount}%
             </span>
@@ -87,11 +87,12 @@ export default function ProductCard({ id, name, ref, priceHT, oldPriceHT, image,
           </p>
         )}
 
-        <div className="flex items-center justify-between">
+        <div className="flex items-end justify-between gap-2">
           <div>
-            <p className="text-[#D4A853] font-bold">{priceHT.toFixed(2)}€ HT{unit && unit !== 'pièce' && <span className="text-xs font-normal text-gray-500"> / {unit}</span>}</p>
+            <p className="text-[#D4A853] font-bold whitespace-nowrap">{priceHT.toFixed(2).replace('.', ',')} € HT</p>
+            {unit && unit !== 'pièce' && <p className="text-xs text-gray-500">par {unit}</p>}
             {oldPriceHT && (
-              <p className="text-xs text-gray-500 line-through">{oldPriceHT.toFixed(2)}€ HT</p>
+              <p className="text-xs text-gray-500 line-through">{oldPriceHT.toFixed(2).replace('.', ',')} € HT</p>
             )}
           </div>
           <button

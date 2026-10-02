@@ -43,7 +43,7 @@ export default function Invoice() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A0B] pt-32 pb-16">
+    <div className="min-h-screen bg-[#0A0A0B] pt-8 sm:pt-12 pb-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">

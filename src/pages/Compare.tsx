@@ -11,7 +11,7 @@ export default function Compare() {
   const compareProducts = products.filter((p) => compareIds.includes(p.id));
 
   return (
-    <div className="min-h-screen bg-[#0A0A0B] pt-32 pb-16">
+    <div className="min-h-screen bg-[#0A0A0B] pt-8 sm:pt-12 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold text-white mb-8">Comparateur de produits</h1>
 

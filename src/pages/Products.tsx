@@ -79,7 +79,7 @@ export default function Products() {
   }, [categoryFilter, search, sort]);
 
   return (
-    <div className="min-h-screen bg-[#0A0A0B] pt-32 pb-16">
+    <div className="min-h-screen bg-[#0A0A0B] pt-8 sm:pt-12 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold text-white mb-2">Catalogue</h1>
         <p className="text-gray-500 mb-8">{filteredProducts.length} produits disponibles</p>
@@ -159,9 +159,9 @@ export default function Products() {
         )}
 
         {/* Sort */}
-        <div className="flex items-center gap-2 mb-6">
-          <ArrowUpDown size={14} className="text-gray-500" />
-          <span className="text-sm text-gray-500">Trier par:</span>
+        <div className="flex items-center gap-2 mb-6 -mx-4 px-4 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <ArrowUpDown size={14} className="text-gray-500 shrink-0" />
+          <span className="text-sm text-gray-500 whitespace-nowrap">Trier par :</span>
           <div className="flex gap-2">
             {[
               { value: "name" as const, label: "Nom" },
@@ -172,7 +172,7 @@ export default function Products() {
               <button
                 key={option.value}
                 onClick={() => setSort(option.value)}
-                className={`px-3 py-1 rounded-full text-sm transition-colors ${
+                className={`px-3 py-1 rounded-full text-sm whitespace-nowrap shrink-0 transition-colors ${
                   sort === option.value
                     ? "bg-[#D4A853]/10 text-[#D4A853]"
                     : "text-gray-500 hover:text-white"

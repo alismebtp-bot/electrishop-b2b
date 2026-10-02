@@ -34,7 +34,7 @@ export default function ProductDetail() {
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-[#0A0A0B] pt-32 pb-16 px-4">
+      <div className="min-h-screen bg-[#0A0A0B] pt-8 sm:pt-12 pb-16 px-4">
         <div className="max-w-md mx-auto text-center">
           <Package className="mx-auto h-16 w-16 text-gray-600 mb-6" />
           <h1 className="text-2xl font-bold text-white mb-4">Produit non trouvé</h1>
@@ -88,7 +88,7 @@ export default function ProductDetail() {
   const favorite = isFavorite(product.id);
 
   return (
-    <div className="min-h-screen bg-[#0A0A0B] pt-32 pb-16">
+    <div className="min-h-screen bg-[#0A0A0B] pt-8 sm:pt-12 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
