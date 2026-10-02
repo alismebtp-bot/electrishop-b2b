@@ -195,7 +195,7 @@ export default function Products() {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             <Suspense fallback={<>{Array(8).fill(null).map((_, i) => <ProductCardFallback key={i} />)}</>}>
               {filteredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard key={product.id} {...product} />
               ))}
             </Suspense>
           </div>

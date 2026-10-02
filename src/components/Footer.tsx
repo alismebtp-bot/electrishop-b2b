@@ -36,7 +36,7 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-4">Catégories</h4>
             <ul className="space-y-2">
-              {['Disjoncteurs', 'Câbles', 'Ampoules LED', 'Outillage', 'Connectique'].map((item) => (
+              {['Protection modulaire', 'Câbles & fils', 'Éclairage LED', 'Bornes de recharge IRVE', 'Outillage & EPI'].map((item) => (
                 <li key={item}>
                   <Link to={`/catalogue?category=${encodeURIComponent(item)}`} className="text-gray-500 text-sm hover:text-[#D4A853] transition-colors">
                     {item}

@@ -20,7 +20,7 @@ const mockPrinters: Printer[] = [
 export default function PrinterSetup() {
   const [printers, setPrinters] = useState<Printer[]>(mockPrinters);
   const [showAdd, setShowAdd] = useState(false);
-  const [newPrinter, setNewPrinter] = useState({ name: '', model: '', connection: 'network' as const, paperSize: 'A4' });
+  const [newPrinter, setNewPrinter] = useState({ name: '', model: '', connection: 'network' as 'usb' | 'network' | 'bluetooth', paperSize: 'A4' });
 
   const handleTestPrint = (id: string) => {
     alert(`Test d'impression envoyé à l'imprimante ${id}`);

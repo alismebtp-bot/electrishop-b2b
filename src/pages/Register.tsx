@@ -46,7 +46,7 @@ export default function Register() {
         date: new Date().toISOString(),
       },
     });
-    dispatch({ type: "LOGIN", payload: { email: formData.email, role: "client" } });
+    dispatch({ type: "SET_USER", payload: { id: Date.now().toString(), email: formData.email, name: formData.email.split("@")[0], role: "customer" } });
     navigate("/home");
   };
 

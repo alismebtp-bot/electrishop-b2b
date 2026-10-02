@@ -11,13 +11,15 @@ interface ProductCardProps {
   oldPriceHT?: number;
   image: string;
   category: string;
-  rating: number;
-  reviewCount: number;
+  rating?: number;
+  reviewCount?: number;
+  brand?: string;
+  unit?: string;
   stock: number;
   promo?: string;
 }
 
-export default function ProductCard({ id, name, ref, priceHT, oldPriceHT, image, category, rating, reviewCount, stock, promo }: ProductCardProps) {
+export default function ProductCard({ id, name, ref, priceHT, oldPriceHT, image, category, rating = 0, reviewCount = 0, stock, promo, brand, unit }: ProductCardProps) {
   const { dispatch } = useCart();
   const [liked, setLiked] = useState(false);
   const [added, setAdded] = useState(false);
@@ -68,18 +70,26 @@ export default function ProductCard({ id, name, ref, priceHT, oldPriceHT, image,
         <Link to={`/produit/${id}`}>
           <h3 className="text-white font-medium text-sm mb-1 line-clamp-2 hover:text-[#D4A853] transition-colors">{name}</h3>
         </Link>
-        <p className="text-xs text-gray-600 mb-2">{ref}</p>
+        <p className="text-xs text-gray-600 mb-2">Réf. {ref}</p>
 
-        <div className="flex items-center gap-1 mb-3">
-          {[...Array(5)].map((_, i) => (
-            <Star key={i} size={12} className={i < Math.floor(rating) ? 'text-[#D4A853] fill-[#D4A853]' : 'text-gray-700'} />
-          ))}
-          <span className="text-xs text-gray-500 ml-1">({reviewCount})</span>
-        </div>
+        {reviewCount > 0 ? (
+          <div className="flex items-center gap-1 mb-3">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} size={12} className={i < Math.floor(rating) ? 'text-[#D4A853] fill-[#D4A853]' : 'text-gray-700'} />
+            ))}
+            <span className="text-xs text-gray-500 ml-1">({reviewCount})</span>
+          </div>
+        ) : (
+          <p className="text-xs text-gray-500 mb-3">
+            {brand}
+            {brand && ' · '}
+            <span className={stock > 0 ? 'text-green-400' : 'text-red-400'}>{stock > 0 ? `${stock} en stock` : 'Sur commande'}</span>
+          </p>
+        )}
 
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-[#D4A853] font-bold">{priceHT.toFixed(2)}€ HT</p>
+            <p className="text-[#D4A853] font-bold">{priceHT.toFixed(2)}€ HT{unit && unit !== 'pièce' && <span className="text-xs font-normal text-gray-500"> / {unit}</span>}</p>
             {oldPriceHT && (
               <p className="text-xs text-gray-500 line-through">{oldPriceHT.toFixed(2)}€ HT</p>
             )}

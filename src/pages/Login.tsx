@@ -21,10 +21,10 @@ export default function Login() {
     setError("");
 
     if (email === "admin@demo.com" && password === "demo") {
-      dispatch({ type: "LOGIN", payload: { email, role: "admin" } });
+      dispatch({ type: "SET_USER", payload: { id: "admin", email: email, name: "Administrateur", role: "admin" } });
       navigate("/admin");
     } else if (email === "client@demo.com" && password === "demo") {
-      dispatch({ type: "LOGIN", payload: { email, role: "client" } });
+      dispatch({ type: "SET_USER", payload: { id: Date.now().toString(), email: email, name: email.split("@")[0], role: "customer" } });
       navigate("/home");
     } else {
       setError("Email ou mot de passe incorrect");

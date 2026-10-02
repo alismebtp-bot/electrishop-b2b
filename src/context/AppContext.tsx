@@ -254,6 +254,8 @@ export function useCart() {
 
   return {
     cart: state.cart,
+    items: state.cart,
+    totalHT: cartTotal,
     cartTotal,
     cartCount,
     addToCart,

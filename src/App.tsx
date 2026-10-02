@@ -4,16 +4,30 @@ import { lazy, Suspense, useEffect } from 'react'
 // === EAGER imports — critical for first paint ===
 import LandingPage from './pages/LandingPage'
 import Home from './pages/Home'
-import Admin from './pages/Admin'
+import Layout from './components/Layout'
 
 // === LAZY imports — loaded on demand ===
+const Products = lazy(() => import('./pages/Products'))
 const ProductDetail = lazy(() => import('./pages/ProductDetail'))
 const Cart = lazy(() => import('./pages/Cart'))
+const Payment = lazy(() => import('./pages/Payment'))
+const CheckoutSuccess = lazy(() => import('./pages/CheckoutSuccess'))
+const CheckoutCancel = lazy(() => import('./pages/CheckoutCancel'))
+const Invoice = lazy(() => import('./pages/Invoice'))
 const Quote = lazy(() => import('./pages/Quote'))
 const Account = lazy(() => import('./pages/Account'))
+const Login = lazy(() => import('./pages/Login'))
+const Register = lazy(() => import('./pages/Register'))
 const Favorites = lazy(() => import('./pages/Favorites'))
+const Wishlist = lazy(() => import('./pages/Wishlist'))
 const Compare = lazy(() => import('./pages/Compare'))
-const OrderTracking = lazy(() => import('./pages/OrderTracking'))
+const Tracking = lazy(() => import('./pages/Tracking'))
+const TrackOrder = lazy(() => import('./pages/TrackOrder'))
+const VendorLogin = lazy(() => import('./pages/VendorLogin'))
+const VendorPortal = lazy(() => import('./pages/VendorPortal'))
+const DriverSignup = lazy(() => import('./pages/DriverSignup'))
+const Admin = lazy(() => import('./pages/Admin'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 
 function LazyFallback() {
   return (
@@ -22,6 +36,12 @@ function LazyFallback() {
     </div>
   )
 }
+
+const lazyEl = (C: React.ComponentType) => (
+  <Suspense fallback={<LazyFallback />}>
+    <C />
+  </Suspense>
+)
 
 export default function App() {
   const location = useLocation()
@@ -33,15 +53,40 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/product/:id" element={<Suspense fallback={<LazyFallback />}><ProductDetail /></Suspense>} />
-      <Route path="/cart" element={<Suspense fallback={<LazyFallback />}><Cart /></Suspense>} />
-      <Route path="/quote" element={<Suspense fallback={<LazyFallback />}><Quote /></Suspense>} />
-      <Route path="/account" element={<Suspense fallback={<LazyFallback />}><Account /></Suspense>} />
-      <Route path="/favorites" element={<Suspense fallback={<LazyFallback />}><Favorites /></Suspense>} />
-      <Route path="/compare" element={<Suspense fallback={<LazyFallback />}><Compare /></Suspense>} />
-      <Route path="/tracking" element={<Suspense fallback={<LazyFallback />}><OrderTracking /></Suspense>} />
-      <Route path="/admin/*" element={<Suspense fallback={<LazyFallback />}><Admin /></Suspense>} />
+
+      {/* Pages boutique : barre de navigation + pied de page */}
+      <Route element={<Layout />}>
+        <Route path="/home" element={<Home />} />
+        <Route path="/products" element={lazyEl(Products)} />
+        <Route path="/catalogue" element={lazyEl(Products)} />
+        <Route path="/nouveautes" element={lazyEl(Products)} />
+        <Route path="/promotions" element={lazyEl(Products)} />
+        <Route path="/product/:id" element={lazyEl(ProductDetail)} />
+        <Route path="/produit/:id" element={lazyEl(ProductDetail)} />
+        <Route path="/cart" element={lazyEl(Cart)} />
+        <Route path="/panier" element={lazyEl(Cart)} />
+        <Route path="/checkout" element={lazyEl(Payment)} />
+        <Route path="/payment" element={lazyEl(Payment)} />
+        <Route path="/checkout/success" element={lazyEl(CheckoutSuccess)} />
+        <Route path="/checkout/cancel" element={lazyEl(CheckoutCancel)} />
+        <Route path="/invoice/:id" element={lazyEl(Invoice)} />
+        <Route path="/quote" element={lazyEl(Quote)} />
+        <Route path="/account" element={lazyEl(Account)} />
+        <Route path="/profil" element={lazyEl(Account)} />
+        <Route path="/favorites" element={lazyEl(Favorites)} />
+        <Route path="/wishlist" element={lazyEl(Wishlist)} />
+        <Route path="/compare" element={lazyEl(Compare)} />
+        <Route path="/tracking" element={lazyEl(Tracking)} />
+        <Route path="/track-order" element={lazyEl(TrackOrder)} />
+      </Route>
+
+      <Route path="/login" element={lazyEl(Login)} />
+      <Route path="/register" element={lazyEl(Register)} />
+      <Route path="/vendor-login" element={lazyEl(VendorLogin)} />
+      <Route path="/vendor" element={lazyEl(VendorPortal)} />
+      <Route path="/driver-signup" element={lazyEl(DriverSignup)} />
+      <Route path="/admin/*" element={lazyEl(Admin)} />
+      <Route path="*" element={lazyEl(NotFound)} />
     </Routes>
   )
 }

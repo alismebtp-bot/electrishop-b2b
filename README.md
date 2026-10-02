@@ -33,3 +33,9 @@ npm run dev
 ```bash
 npm run build
 ```
+
+## Démo
+
+- Catalogue : `src/data/products.ts` — 448 références, 14 catégories (repris de la version en ligne), visuels dans `public/img/`.
+- Comptes de test : `admin@demo.com` / `demo` (espace admin) et `client@demo.com` / `demo`.
+- Routes principales : `/home`, `/catalogue`, `/produit/:id`, `/panier`, `/checkout`, `/quote` (devis), `/profil`, `/admin`.
