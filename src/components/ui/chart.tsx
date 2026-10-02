@@ -209,4 +209,4 @@ function getPayloadConfigFromPayload(config: ChartConfig, payload: unknown, key:
 }
 
 export { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent, ChartStyle }
-export type ChartConfig = Record<string, { label?: React.ReactNode; icon?: React.ComponentType; color?: string; theme?: Record<string, string> }>
+export type ChartConfig = Record<string, { label?: React.ReactNode; icon?: React.ComponentType<{ className?: string }>; color?: string; theme?: Record<string, string> }>

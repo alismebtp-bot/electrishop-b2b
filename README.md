@@ -33,3 +33,9 @@ npm run dev
 ```bash
 npm run build
 ```
+
+## Démo
+
+- Catalogue : `src/data/products.ts` contient un **catalogue de démonstration** (64 produits, 8 catégories, prix HT indicatifs). À remplacer par le vrai catalogue en gardant la même interface `Product`.
+- Comptes de test : `admin@demo.com` / `demo` (espace admin) et `client@demo.com` / `demo`.
+- Routes principales : `/home`, `/catalogue`, `/produit/:id`, `/panier`, `/checkout`, `/devis` → `/quote`, `/profil`, `/admin`.

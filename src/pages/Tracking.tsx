@@ -6,6 +6,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import "leaflet/dist/leaflet.css";
 
 // Lazy load Leaflet to avoid SSR issues
 let L: any = null;
@@ -20,7 +21,7 @@ export default function Tracking() {
     import("leaflet").then((leaflet) => {
       if (!mounted) return;
       L = leaflet.default || leaflet;
-      require("leaflet/dist/leaflet.css");
+      // CSS chargé en import statique (voir en haut du fichier)
 
       if (mapRef.current && !leafletMap.current) {
         const map = L.map(mapRef.current).setView([48.8566, 2.3522], 12);

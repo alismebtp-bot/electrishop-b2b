@@ -20,9 +20,10 @@ const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
       >
         {React.Children.map(children, (child, index) => {
           if (!React.isValidElement(child)) return child
-          return React.cloneElement(child as React.ReactElement, {
+          const el = child as React.ReactElement<{ className?: string }>
+          return React.cloneElement(el, {
             className: cn(
-              (child as React.ReactElement).props.className,
+              el.props.className,
               "rounded-none border-0",
               index !== 0 && "border-l border-white/10",
               index === 0 && "rounded-l-lg",

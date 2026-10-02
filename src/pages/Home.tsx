@@ -193,7 +193,7 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             <Suspense fallback={<>{Array(4).fill(null).map((_, i) => <ProductCardFallback key={i} />)}</>}>
               {featuredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard key={product.id} {...product} />
               ))}
             </Suspense>
           </div>
@@ -219,7 +219,7 @@ export default function Home() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <Suspense fallback={<>{Array(4).fill(null).map((_, i) => <ProductCardFallback key={i} />)}</>}>
                 {newProducts.map((product) => (
-                  <ProductCard key={product.id} product={product} />
+                  <ProductCard key={product.id} {...product} />
                 ))}
               </Suspense>
             </div>
@@ -239,7 +239,7 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <Suspense fallback={<>{Array(4).fill(null).map((_, i) => <ProductCardFallback key={i} />)}</>}>
               {bestsellers.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard key={product.id} {...product} />
               ))}
             </Suspense>
           </div>
