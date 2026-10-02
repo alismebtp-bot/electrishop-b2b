@@ -44,13 +44,19 @@ export function useCart() {
             ? { ...base, priceHT: line.priceHT }
             : {
                 ref: line.id,
+                ean: "",
                 brand: "",
                 category: "",
                 categorySlug: "",
+                subcategory: "",
                 description: "",
+                specs: {},
+                unit: "pièce",
+                moq: 1,
+                packQty: 1,
                 stock: 0,
-                rating: 0,
-                reviewCount: 0,
+                popularity: 0,
+                related: [],
                 ...line,
               };
           app.dispatch({ type: "ADD_TO_CART", payload: { product, quantity } });

@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Zap, Truck, Shield, Headphones, Star, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { products } from "@/data/products";
+import { products, productCategories } from "@/data/products";
+import * as Icons from "lucide-react";
 
 const ProductCard = lazy(() => import("@/components/ProductCard"));
 
@@ -20,20 +21,16 @@ function ProductCardFallback() {
   );
 }
 
-const categories = [
-  { name: "Câbles & Fils", icon: "🔌", slug: "cables-et-fils" },
-  { name: "Éclairage LED", icon: "💡", slug: "eclairage-led" },
-  { name: "Tableaux Électriques", icon: "⚡", slug: "tableaux-electriques" },
-  { name: "Prises & Interrupteurs", icon: "🔘", slug: "prises-et-interrupteurs" },
-  { name: "Outils", icon: "🔧", slug: "outils" },
-  { name: "Domotique", icon: "🏠", slug: "domotique" },
-  { name: "Sécurité", icon: "🔒", slug: "securite" },
-  { name: "Chauffage & Clim", icon: "🌡️", slug: "chauffage-et-climatisation" },
-];
+const categories = productCategories;
 
 const featuredProducts = products.filter((p) => p.featured).slice(0, 8);
 const newProducts = products.filter((p) => p.new).slice(0, 4);
-const bestsellers = [...products].sort((a, b) => (b.rating || 0) - (a.rating || 0)).slice(0, 4);
+const bestsellers = [...products].sort((a, b) => b.popularity - a.popularity).slice(0, 4);
+
+function CategoryIcon({ name }: { name: string }) {
+  const Icon = (Icons as unknown as Record<string, Icons.LucideIcon>)[name] ?? Icons.Zap;
+  return <Icon className="w-7 h-7 mx-auto mb-2 text-[#D4A853]" />;
+}
 
 export default function Home() {
   return (
@@ -160,14 +157,14 @@ export default function Home() {
               Voir tout <ChevronRight size={16} />
             </Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-4">
             {categories.map((cat) => (
               <Link
                 key={cat.slug}
                 to={`/products?category=${encodeURIComponent(cat.name)}`}
                 className="bg-[#141415] border border-white/10 rounded-xl p-4 text-center hover:border-[#D4A853]/30 transition-colors"
               >
-                <span className="text-3xl mb-2 block">{cat.icon}</span>
+                <CategoryIcon name={cat.icon} />
                 <p className="text-xs text-white font-medium line-clamp-2">{cat.name}</p>
               </Link>
             ))}

@@ -137,7 +137,7 @@ export default function ProductDetail() {
             </div>
 
             <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">{product.name}</h1>
-            <p className="text-gray-500 text-sm mb-4">Référence: {product.id}</p>
+            <p className="text-gray-500 text-sm mb-4">Référence : {product.ref}</p>
 
             <div className="flex items-baseline gap-3 mb-6">
               <span className="text-3xl font-bold text-[#D4A853]">{product.priceHT.toFixed(2)} €</span>
@@ -232,10 +232,18 @@ export default function ProductDetail() {
             <Card className="bg-[#141415] border-white/10">
               <CardContent className="p-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="flex justify-between py-2 border-b border-white/5">
-                    <span className="text-gray-500">Référence</span>
-                    <span className="text-white">{product.id}</span>
-                  </div>
+                  {[
+                    ["Référence", product.ref],
+                    ["Marque", product.brand],
+                    ["EAN", product.ean],
+                    ["Conditionnement", product.unit],
+                    ...Object.entries(product.specs),
+                  ].map(([k, v]) => (
+                    <div key={k} className="flex justify-between gap-4 py-2 border-b border-white/5">
+                      <span className="text-gray-500">{k}</span>
+                      <span className="text-white text-right">{v}</span>
+                    </div>
+                  ))}
                   <div className="flex justify-between py-2 border-b border-white/5">
                     <span className="text-gray-500">Catégorie</span>
                     <span className="text-white">{product.category}</span>
@@ -254,7 +262,7 @@ export default function ProductDetail() {
                   </div>
                   <div className="flex justify-between py-2 border-b border-white/5">
                     <span className="text-gray-500">Disponibilité</span>
-                    <span className="text-green-400">En stock</span>
+                    <span className={product.stock > 0 ? "text-green-400" : "text-orange-400"}>{product.stock > 0 ? `En stock (${product.stock})` : "Sur commande"}</span>
                   </div>
                 </div>
               </CardContent>
